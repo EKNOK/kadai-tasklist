@@ -2,11 +2,6 @@ class TasksController < ApplicationController
     before_action :require_user_logged_in
     before_action :set_task, only: [:show, :edit, :update, :destroy]
     
-    def loginuser_index
-        @user = current_user
-        @task = current_user.tasks.build
-        @tasks = current_user.tasks.order('created_at DESC').page(params[:page])
-    end
     
     def index
         @tasks = Task.all.page(params[:page])
