@@ -15,4 +15,13 @@ class ApplicationController < ActionController::Base
   def counts(user)
       @count_tasks = user.tasks.count
   end
+  
+  def correct_user
+        @task = current_user.tasks.find_by(id: params[:id])
+        unless @task
+            flash[:danger] = "権限がありません"
+            redirect_to root_url
+        end
+  end
+
 end
